@@ -11,7 +11,7 @@ const Navbar = () => {
         return false;
     });
 
-    const { favourites } = useFavourites();
+    const { favourites, setIsSidebarOpen } = useFavourites();
 
     useEffect(() => {
         if (isDarkMode) {
@@ -40,8 +40,11 @@ const Navbar = () => {
                     {/* Right Actions */}
                     <div className="flex items-center gap-4">
                         {/* Favorites Counter (Mobile/Desktop) */}
-                        <div className="relative group">
-                            <Heart className="w-6 h-6 text-slate-600 dark:text-slate-300 group-hover:text-red-500 transition-colors cursor-pointer" />
+                        <div
+                            className="relative group cursor-pointer"
+                            onClick={() => setIsSidebarOpen(true)}
+                        >
+                            <Heart className="w-6 h-6 text-slate-600 dark:text-slate-300 group-hover:text-red-500 transition-colors" />
                             {favourites.length > 0 && (
                                 <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-slate-900">
                                     {favourites.length}
