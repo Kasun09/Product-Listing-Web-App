@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { PackageSearch } from 'lucide-react';
+import { PackageSearch, LayoutGrid, LayoutList } from 'lucide-react';
 import { fetchProducts } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
@@ -10,16 +10,19 @@ import ErrorMessage from '../components/ErrorMessage';
 import useDebounce from '../hooks/useDebounce';
 import { isRecommended, calculateAveragePrice } from '../utils/recommendation';
 import { useFavourites } from '../context/FavouriteContext';
+import ProductDetailsModal from '../components/ProductDetailsModal';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     // Filter & Sort States
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [sortOption, setSortOption] = useState('default');
+    const [viewMode, setViewMode] = useState('grid');
 
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
     const { favourites, toggleFavorite, isFavorite } = useFavourites();
@@ -95,24 +98,57 @@ const ProductList = () => {
     return (
         <div className="bg-slate-50 dark:bg-slate-900 min-h-screen pb-20 transition-colors duration-300">
             {/* Header / Controls Section */}
-            <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-16 z-40 transition-colors duration-300">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <div className="flex flex-col gap-4">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-                                Discover Products
-                            </h1>
-                            <div className="flex flex-col sm:flex-row gap-3">
-                                <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-                                <SortDropdown sortOption={sortOption} onSortChange={setSortOption} />
-                            </div>
+            <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-16 z-40 transition-colors duration-300 shadow-sm">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div className="flex flex-col gap-6">
+
+                        {/* 1. Search Bar - Centered & Wide */}
+                        <div className="w-full flex justify-center">
+                            <SearchBar
+                                searchTerm={searchTerm}
+                                onSearchChange={setSearchTerm}
+                                className="max-w-3xl shadow-sm hover:shadow-md transition-shadow"
+                            />
                         </div>
 
-                        <CategoryFilter
-                            categories={categories}
-                            selectedCategory={selectedCategory}
-                            onSelectCategory={setSelectedCategory}
-                        />
+
+                        {/* 2. Controls Toolbar */}
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+
+                            {/* Sort - Left Side */}
+                            <div className="flex-shrink-0">
+                                <SortDropdown sortOption={sortOption} onSortChange={setSortOption} />
+                            </div>
+
+                            {/* Categories & View Toggle - Right Side */}
+                            <div className="flex-grow flex flex-col md:flex-row md:items-center justify-end gap-4 overflow-hidden">
+                                <div className="overflow-x-auto pb-2 md:pb-0 scrollbar-hide w-full md:w-auto">
+                                    <CategoryFilter
+                                        categories={categories}
+                                        selectedCategory={selectedCategory}
+                                        onSelectCategory={setSelectedCategory}
+                                    />
+                                </div>
+
+                                {/* View Toggle */}
+                                <div className="flex-shrink-0 flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg self-end md:self-auto">
+                                    <button
+                                        onClick={() => setViewMode('list')}
+                                        className={`p-2 rounded-md transition-all ${viewMode === 'list' ? 'bg-white dark:bg-slate-700 shadow text-indigo-600 dark:text-indigo-400' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                                        title="List View"
+                                    >
+                                        <LayoutList className="w-5 h-5" />
+                                    </button>
+                                    <button
+                                        onClick={() => setViewMode('grid')}
+                                        className={`p-2 rounded-md transition-all ${viewMode === 'grid' ? 'bg-white dark:bg-slate-700 shadow text-indigo-600 dark:text-indigo-400' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                                        title="Grid View"
+                                    >
+                                        <LayoutGrid className="w-5 h-5" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,19 +156,27 @@ const ProductList = () => {
             {/* Content Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {loading ? (
-                    <Loader />
+                    <Loader viewMode={viewMode} />
                 ) : filteredAndSortedProducts.length > 0 ? (
                     <>
-                        <p className="text-sm text-slate-500 mb-6 font-medium">
-                            Showing {filteredAndSortedProducts.length} results
-                        </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div className="flex justify-between items-center mb-6">
+                            <p className="text-sm text-slate-500 font-medium">
+                                Showing {filteredAndSortedProducts.length} results
+                            </p>
+                        </div>
+
+                        <div className={viewMode === 'grid'
+                            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                            : "flex flex-col gap-4"
+                        }>
                             {filteredAndSortedProducts.map((product) => (
                                 <ProductCard
                                     key={product.id}
                                     product={product}
                                     isFavorite={isFavorite(product.id)}
                                     toggleFavorite={toggleFavorite}
+                                    viewMode={viewMode}
+                                    onViewDetails={setSelectedProduct}
                                 />
                             ))}
                         </div>
@@ -151,6 +195,14 @@ const ProductList = () => {
                     </div>
                 )}
             </div>
+
+            {/* Product Details Modal */}
+            <ProductDetailsModal
+                product={selectedProduct}
+                onClose={() => setSelectedProduct(null)}
+                isFavorite={selectedProduct ? isFavorite(selectedProduct.id) : false}
+                toggleFavorite={toggleFavorite}
+            />
         </div>
     );
 };
