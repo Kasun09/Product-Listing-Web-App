@@ -1,0 +1,32 @@
+import React, { createContext, useContext } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
+
+const FavouriteContext = createContext();
+
+export const useFavourites = () => {
+    return useContext(FavouriteContext);
+};
+
+export const FavouriteProvider = ({ children }) => {
+    const [favourites, setFavourites] = useLocalStorage('product-favourites', []);
+
+    const toggleFavorite = (productId) => {
+        setFavourites((prev) => {
+            if (prev.includes(productId)) {
+                return prev.filter((id) => id !== productId);
+            } else {
+                return [...prev, productId];
+            }
+        });
+    };
+
+    const isFavorite = (productId) => {
+        return favourites.includes(productId);
+    };
+
+    return (
+        <FavouriteContext.Provider value={{ favourites, toggleFavorite, isFavorite }}>
+            {children}
+        </FavouriteContext.Provider>
+    );
+};
