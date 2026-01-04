@@ -48,7 +48,7 @@ const ProductCard = ({ product, isFavorite, toggleFavorite }) => {
                     <div className="flex items-center bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded text-green-700 dark:text-green-400 text-xs font-bold">
                         ★ {product.rating.rate}
                     </div>
-                    <span className="text-xs text-slate-400">({product.rating.count} reviews)</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400">({product.rating.count} reviews)</span>
                 </div>
 
                 <div className="mt-auto flex items-center justify-between">

@@ -6,4 +6,12 @@
   html {
     font-family: 'Inter', sans-serif;
   }
+
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-slate-900 text-slate-50;
+  }
 }

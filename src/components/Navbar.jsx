@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ShoppingBag, Moon, Sun, Heart } from 'lucide-react';
 import { useFavourites } from '../context/FavouriteContext';
+import { twMerge } from 'tailwind-merge';
 
 const Navbar = () => {
     const [isDarkMode, setIsDarkMode] = useState(() => {
         if (typeof window !== 'undefined') {
-            return localStorage.getItem('theme') === 'dark' ||
-                (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            return localStorage.getItem('theme') === 'dark';
         }
         return false;
     });
@@ -50,16 +50,27 @@ const Navbar = () => {
                         </div>
 
                         {/* Theme Toggle */}
+                        {/* Theme Toggle */}
                         <button
                             onClick={() => setIsDarkMode(!isDarkMode)}
-                            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
+                            className={twMerge(
+                                "relative inline-flex h-9 w-16 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                                isDarkMode ? "bg-slate-700" : "bg-indigo-100"
+                            )}
                             aria-label="Toggle Dark Mode"
                         >
-                            {isDarkMode ? (
-                                <Sun className="w-5 h-5 text-amber-400" />
-                            ) : (
-                                <Moon className="w-5 h-5 text-indigo-600" />
-                            )}
+                            <span
+                                className={twMerge(
+                                    "flex h-7 w-7 transform items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 ease-in-out",
+                                    isDarkMode ? "translate-x-8" : "translate-x-1"
+                                )}
+                            >
+                                {isDarkMode ? (
+                                    <Moon className="h-4 w-4 text-indigo-600" />
+                                ) : (
+                                    <Sun className="h-4 w-4 text-amber-500" />
+                                )}
+                            </span>
                         </button>
                     </div>
                 </div>
