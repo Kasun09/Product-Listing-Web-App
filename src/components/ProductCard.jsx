@@ -26,7 +26,7 @@ const ProductCard = ({ product, isFavorite, toggleFavorite }) => {
             </button>
 
             {/* Product Image */}
-            <div className="aspect-square overflow-hidden bg-slate-50 p-8">
+            <div className="aspect-square w-full overflow-hidden bg-slate-50 dark:bg-slate-900/50 p-4 relative">
                 <img
                     src={product.image}
                     alt={product.title}

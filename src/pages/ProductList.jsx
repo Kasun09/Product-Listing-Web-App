@@ -32,7 +32,11 @@ const ProductList = () => {
         setLoading(true);
         setError(null);
         try {
-            const data = await fetchProducts();
+            // Wait for both the API call and a minimum delay of 800ms to ensure the loader is visible and preventing flickering
+            const [data] = await Promise.all([
+                fetchProducts(),
+                new Promise(resolve => setTimeout(resolve, 800))
+            ]);
             setProducts(data);
         } catch (err) {
             setError(err.message);
