@@ -11,6 +11,9 @@ import useDebounce from '../hooks/useDebounce';
 import { isRecommended, calculateAveragePrice } from '../utils/recommendation';
 import { useFavourites } from '../context/FavouriteContext';
 import ProductDetailsModal from '../components/ProductDetailsModal';
+import Pagination from '../components/Pagination';
+
+const ITEMS_PER_PAGE = 8;
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -23,6 +26,7 @@ const ProductList = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [sortOption, setSortOption] = useState('default');
     const [viewMode, setViewMode] = useState('grid');
+    const [currentPage, setCurrentPage] = useState(1);
 
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
     const { favourites, toggleFavorite, isFavorite } = useFavourites();
@@ -89,6 +93,19 @@ const ProductList = () => {
         }));
 
     }, [products, selectedCategory, debouncedSearchTerm, sortOption, averagePrice]);
+
+    // Pagination Logic
+    const totalPages = Math.ceil(filteredAndSortedProducts.length / ITEMS_PER_PAGE);
+
+    const paginatedProducts = useMemo(() => {
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        return filteredAndSortedProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    }, [filteredAndSortedProducts, currentPage]);
+
+    // Reset pagination when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedCategory, debouncedSearchTerm, sortOption]);
 
     // Renders
     if (error) {
@@ -169,7 +186,7 @@ const ProductList = () => {
                             ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                             : "flex flex-col gap-4"
                         }>
-                            {filteredAndSortedProducts.map((product) => (
+                            {paginatedProducts.map((product) => (
                                 <ProductCard
                                     key={product.id}
                                     product={product}
@@ -180,6 +197,13 @@ const ProductList = () => {
                                 />
                             ))}
                         </div>
+
+                        {/* Pagination */}
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                        />
                     </>
                 ) : (
                     <div className="flex flex-col items-center justify-center py-20 text-slate-400">
