@@ -49,7 +49,7 @@ const Navbar = () => {
                             )}
                         </div>
 
-                        {/* Theme Toggle */}
+
                         {/* Theme Toggle */}
                         <button
                             onClick={() => setIsDarkMode(!isDarkMode)}
