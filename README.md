@@ -59,7 +59,7 @@ Follow these steps to run the project locally on your machine:
 
 ### 1) Clone the repository
 ```bash
-git clone https://github.com/your-username/product-listing-web-app.git
+git clone https://github.com/Kasun09/Product-Listing-Web-App.git
 ```
 
 ### 2) Navigate to the project folder
