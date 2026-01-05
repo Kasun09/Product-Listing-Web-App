@@ -5,7 +5,7 @@ const ProductCard = ({ product, isFavorite, toggleFavorite, viewMode = 'grid', o
     const isList = viewMode === 'list';
 
     return (
-        <div className={`group relative bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-700 overflow-hidden ${isList ? 'flex flex-row items-center p-4 gap-6' : 'flex flex-col'
+        <div className={`group relative bg-blue-200 dark:bg-slate-600 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-800 dark:border-slate-200 overflow-hidden ${isList ? 'flex flex-row items-center p-4 gap-6' : 'flex flex-col'
             }`}>
 
             {/* Recommended Badge */}
