@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }) => {
     return (
-        <div className="flex flex-wrap gap-2 py-2">
+        <div className="flex flex-nowrap gap-2 py-2 overflow-x-auto scrollbar-hide">
             <button
                 onClick={() => onSelectCategory('all')}
                 className={twMerge(

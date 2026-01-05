@@ -30,7 +30,7 @@ const ProductCard = ({ product, isFavorite, toggleFavorite, viewMode = 'grid', o
             </button>
 
             {/* Product Image */}
-            <div className={`${isList ? 'w-32 h-32 md:w-48 md:h-48' : 'aspect-square w-full'} flex-shrink-0 overflow-hidden bg-slate-50 dark:bg-slate-900/50 p-4 relative rounded-xl`}>
+            <div className={`${isList ? 'w-32 h-32 md:w-48 md:h-48' : 'aspect-square w-full'} flex-shrink-0 overflow-hidden bg-slate-50 dark:bg-slate-900/50 p-2 sm:p-4 relative rounded-xl`}>
                 <img
                     src={product.image}
                     alt={product.title}
@@ -39,7 +39,7 @@ const ProductCard = ({ product, isFavorite, toggleFavorite, viewMode = 'grid', o
             </div>
 
             {/* Product Details */}
-            <div className={`flex flex-col flex-grow ${isList ? 'py-2 px-0' : 'p-5'}`}>
+            <div className={`flex flex-col flex-grow ${isList ? 'py-2 px-0' : 'p-3 sm:p-5'}`}>
                 <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400 uppercase mb-2">
                     {product.category}
                 </span>
@@ -57,7 +57,7 @@ const ProductCard = ({ product, isFavorite, toggleFavorite, viewMode = 'grid', o
                     </p>
                 )}
 
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-2 mb-2 sm:mb-4">
                     <div className="flex items-center bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded text-green-700 dark:text-green-400 text-xs font-bold">
                         ★ {product.rating.rate}
                     </div>
@@ -65,12 +65,12 @@ const ProductCard = ({ product, isFavorite, toggleFavorite, viewMode = 'grid', o
                 </div>
 
                 <div className={`mt-auto flex items-center justify-between ${isList ? 'md:justify-start md:gap-8' : ''}`}>
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">
+                    <span className="text-base sm:text-xl font-bold text-slate-900 dark:text-white">
                         ${product.price}
                     </span>
                     <button
                         onClick={() => onViewDetails(product)}
-                        className="bg-slate-900 dark:bg-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-slate-800 dark:hover:bg-indigo-500 transition-colors"
+                        className="bg-slate-900 dark:bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg hover:bg-slate-800 dark:hover:bg-indigo-500 transition-colors"
                     >
                         View Details
                     </button>
