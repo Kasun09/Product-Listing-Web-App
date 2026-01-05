@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart } from 'lucide-react'; // Lucide icons use karanna lesiyi
+import { Heart } from 'lucide-react';
 
 const ProductCard = ({ product, isFavorite, toggleFavorite, viewMode = 'grid', onViewDetails }) => {
     const isList = viewMode === 'list';

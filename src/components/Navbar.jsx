@@ -24,7 +24,7 @@ const Navbar = () => {
     }, [isDarkMode]);
 
     return (
-        <nav className="sticky top-0 z-50 w-full backdrop-blur-lg bg-white/70 dark:bg-slate-900/70 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <nav className="sticky top-0 z-50 w-full backdrop-blur-lg bg-blue-500/70 dark:bg-gray-400/70 border-b border-blue-200 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}

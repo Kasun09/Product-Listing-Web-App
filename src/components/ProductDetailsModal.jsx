@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import { X, Star, ShoppingCart, Heart } from 'lucide-react';
 
 const ProductDetailsModal = ({ product, onClose, isFavorite, toggleFavorite }) => {
-    if (!product) return null;
-
     // Prevent body scroll when modal is open
     useEffect(() => {
-        document.body.style.overflow = 'hidden';
+        if (product) {
+            document.body.style.overflow = 'hidden';
+        }
         return () => {
             document.body.style.overflow = 'unset';
         };
-    }, []);
+    }, [product]);
+
+    if (!product) return null;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -91,8 +93,8 @@ const ProductDetailsModal = ({ product, onClose, isFavorite, toggleFavorite }) =
                         <button
                             onClick={() => toggleFavorite(product.id)}
                             className={`px-6 py-4 rounded-xl font-bold border-2 transition-colors flex items-center justify-center gap-2 ${isFavorite
-                                    ? 'border-red-500 text-red-500 bg-red-50 dark:bg-red-900/10'
-                                    : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white hover:border-slate-300 dark:hover:border-slate-600'
+                                ? 'border-red-500 text-red-500 bg-red-50 dark:bg-red-900/10'
+                                : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white hover:border-slate-300 dark:hover:border-slate-600'
                                 }`}
                         >
                             <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
