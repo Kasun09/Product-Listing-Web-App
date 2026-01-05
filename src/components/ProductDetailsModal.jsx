@@ -23,7 +23,7 @@ const ProductDetailsModal = ({ product, onClose, isFavorite, toggleFavorite }) =
             ></div>
 
             {/* Modal Content */}
-            <div className="relative w-full max-w-4xl bg-blue-200 dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden animate-scale-up flex flex-col md:flex-row max-h-[90vh]">
+            <div className="relative w-full max-w-4xl bg-blue-200 dark:bg-slate-700 rounded-3xl shadow-2xl overflow-hidden animate-scale-up flex flex-col md:flex-row max-h-[90vh]">
 
                 {/* Close Button */}
                 <button
