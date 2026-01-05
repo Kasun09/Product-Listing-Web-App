@@ -1,4 +1,4 @@
-# 🛒 ProStore - Product Listing Web App
+# 🛒 ShopHub - Product Listing Web App
 
 A premium, production-grade Product Listing application built with **React 19**, **Vite**, and **Tailwind CSS**. This project demonstrates advanced React patterns, state management, and high-performance UI/UX design.
 
