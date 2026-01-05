@@ -12,18 +12,18 @@ A premium, production-grade Product Listing application built with **React 19**,
 ## ✨ Features
 
 ### 🚀 Performance & Logic
-- **Smart Search:** Real-time search with `useDebounce` hook to prevent performance lag.
-- **Advanced Filtering:** Filter products by category and sort by price (High to Low / Low to High) simultaneously.
-- **Global State Management:** Powered by **React Context API** to manage favorites across the entire app without prop drilling.
-- **Persistent Favorites:** Favorites are synced with `localStorage` via a custom hook, ensuring data is saved even after a page refresh.
-- **Logic-based Recommendations:** Products are dynamically highlighted as "Recommended" based on ratings (>4) and pricing algorithms.
+- **Smart Search:** Real-time search with `useDebounce` hook to prevent performance lag and unnecessary re-renders.
+- **Advanced Filtering:** Multi-layer filtering by category and price sorting (High to Low / Low to High) simultaneously.
+- **Global State Management:** Powered by **React Context API** for seamless favorite management across components.
+- **Persistent Favorites:** Custom `useLocalStorage` hook ensures user favorites are saved even after page refreshes.
+- **Logic-based Recommendations:** Smart "Recommended" badges triggered by rating (>4) and pricing algorithms.
 
 ### 🎨 UI/UX Excellence
-- **Responsive Grid:** Fully adaptive layout from mobile (`grid-cols-1`) to desktop (`grid-cols-4`).
-- **Dual View Modes:** Seamlessly switch between **Grid** and **List** views.
-- **Dark Mode:** Native dark mode support using Tailwind's `dark` variant.
-- **Skeleton Loaders:** Professional loading states using `animate-pulse` to improve perceived performance.
-- **Micro-animations:** Custom CSS keyframes for smooth slide-in and scale-up effects.
+- **Fluid Animations:** Integrated **Framer Motion** for smooth page transitions, list filtering effects, and interactive modal/sidebar entry.
+- **Responsive Layout:** Adaptive grid system from mobile (`grid-cols-1`) to desktop (`grid-cols-4`).
+- **Dual View Modes:** Toggle between modern **Grid** and detailed **List** views instantly.
+- **Smart Navigation:** Fixed pagination behavior with an "Instant Scroll to Top" feature for better user flow.
+- **Professional States:** Skeleton loaders (`animate-pulse`) and custom error handling for a polished feel.
 
 ---
 
@@ -33,10 +33,10 @@ A premium, production-grade Product Listing application built with **React 19**,
 | :--- | :--- |
 | **React 19** | UI Library |
 | **Vite** | Build Tool (Fast Refresh) |
-| **Tailwind CSS** | Styling |
+| **Tailwind CSS** | Utility-first Styling |
+| **Framer Motion** | Advanced Animations |
 | **Lucide-React** | Icon Library |
-| **Context API** | State Management |
-| **Vercel** | Deployment |
+| **Context API** | Global State Management |
 
 ---
 
@@ -49,7 +49,7 @@ src/
 ├── hooks/      # Custom logic (useDebounce, useLocalStorage)
 ├── pages/      # Main page layouts (ProductList)
 ├── services/   # API integration (FakeStoreAPI)
-└── utils/      # Recommendation logic
+└── utils/      # Utility functions (cn.js, recommendation logic)
 ```
 
 ---
