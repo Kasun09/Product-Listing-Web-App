@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { PackageSearch, LayoutGrid, LayoutList } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { fetchProducts } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
@@ -182,21 +183,25 @@ const ProductList = () => {
                             </p>
                         </div>
 
-                        <div className={viewMode === 'grid'
-                            ? "grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6"
-                            : "flex flex-col gap-4"
-                        }>
-                            {paginatedProducts.map((product) => (
-                                <ProductCard
-                                    key={product.id}
-                                    product={product}
-                                    isFavorite={isFavorite(product.id)}
-                                    toggleFavorite={toggleFavorite}
-                                    viewMode={viewMode}
-                                    onViewDetails={setSelectedProduct}
-                                />
-                            ))}
-                        </div>
+                        <motion.div
+                            layout
+                            className={viewMode === 'grid'
+                                ? "grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6"
+                                : "flex flex-col gap-4"
+                            }>
+                            <AnimatePresence mode='popLayout'>
+                                {paginatedProducts.map((product) => (
+                                    <ProductCard
+                                        key={product.id}
+                                        product={product}
+                                        isFavorite={isFavorite(product.id)}
+                                        toggleFavorite={toggleFavorite}
+                                        viewMode={viewMode}
+                                        onViewDetails={setSelectedProduct}
+                                    />
+                                ))}
+                            </AnimatePresence>
+                        </motion.div>
 
                         {/* Pagination */}
                         <Pagination
@@ -221,12 +226,17 @@ const ProductList = () => {
             </div>
 
             {/* Product Details Modal */}
-            <ProductDetailsModal
-                product={selectedProduct}
-                onClose={() => setSelectedProduct(null)}
-                isFavorite={selectedProduct ? isFavorite(selectedProduct.id) : false}
-                toggleFavorite={toggleFavorite}
-            />
+            <AnimatePresence>
+                {selectedProduct && (
+                    <ProductDetailsModal
+                        key="product-details-modal"
+                        product={selectedProduct}
+                        onClose={() => setSelectedProduct(null)}
+                        isFavorite={isFavorite(selectedProduct.id)}
+                        toggleFavorite={toggleFavorite}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 };
