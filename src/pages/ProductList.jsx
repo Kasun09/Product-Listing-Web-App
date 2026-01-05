@@ -108,6 +108,11 @@ const ProductList = () => {
         setCurrentPage(1);
     }, [selectedCategory, debouncedSearchTerm, sortOption]);
 
+    // Scroll to top when page changes
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
+
     // Renders
     if (error) {
         return <ErrorMessage message={error} onRetry={loadProducts} />;
