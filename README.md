@@ -1,16 +1,129 @@
-# React + Vite
+# 🛒 ShopHub - Product Listing Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, production-grade Product Listing application built with **React 19**, **Vite**, and **Tailwind CSS**. This project demonstrates advanced React patterns, state management, and high-performance UI/UX design.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Demo
+**[Click here to view the live site](https://product-listing-web-app-ten.vercel.app/)**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+### 🚀 Performance & Logic
+- **Smart Search:** Real-time search with `useDebounce` hook to prevent performance lag.
+- **Advanced Filtering:** Filter products by category and sort by price (High to Low / Low to High) simultaneously.
+- **Global State Management:** Powered by **React Context API** to manage favorites across the entire app without prop drilling.
+- **Persistent Favorites:** Favorites are synced with `localStorage` via a custom hook, ensuring data is saved even after a page refresh.
+- **Logic-based Recommendations:** Products are dynamically highlighted as "Recommended" based on ratings (>4) and pricing algorithms.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🎨 UI/UX Excellence
+- **Responsive Grid:** Fully adaptive layout from mobile (`grid-cols-1`) to desktop (`grid-cols-4`).
+- **Dual View Modes:** Seamlessly switch between **Grid** and **List** views.
+- **Dark Mode:** Native dark mode support using Tailwind's `dark` variant.
+- **Skeleton Loaders:** Professional loading states using `animate-pulse` to improve perceived performance.
+- **Micro-animations:** Custom CSS keyframes for smooth slide-in and scale-up effects.
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+| :--- | :--- |
+| **React 19** | UI Library |
+| **Vite** | Build Tool (Fast Refresh) |
+| **Tailwind CSS** | Styling |
+| **Lucide-React** | Icon Library |
+| **Context API** | State Management |
+| **Vercel** | Deployment |
+
+---
+
+## 📂 Folder Structure
+
+```text
+src/
+├── components/ # Reusable UI components (ProductCard, Navbar, etc.)
+├── context/    # Global state management (FavouriteContext)
+├── hooks/      # Custom logic (useDebounce, useLocalStorage)
+├── pages/      # Main page layouts (ProductList)
+├── services/   # API integration (FakeStoreAPI)
+└── utils/      # Recommendation logic
+```
+
+---
+## ⚙️ Setup & Installation
+
+Follow these steps to run the project locally on your machine:
+
+### 1) Clone the repository
+```bash
+git clone https://github.com/Kasun09/Product-Listing-Web-App.git
+```
+
+### 2) Navigate to the project folder
+```bash
+cd product-listing-web-app
+```
+
+### 3) Install dependencies
+```bash
+npm install
+```
+
+### 4) Start the development server
+```bash
+npm run dev
+```
+
+---
+
+## 🤖 AI Tools Usage
+
+This project utilized AI tools (Gemini/ChatGPT) for:
+
+* **Architecture Planning:** Validating a modular folder structure.
+* **Logic Optimization:** Refining `useDebounce` and `useMemo` hooks.
+* **Debugging:** Resolving CSS layout and async API issues.
+* **Documentation:** Structuring technical analysis and README.
+
+---
+
+## 📝 Evaluation Criteria Met
+
+- [x] **API Handling:** Robust async logic with error handling.
+- [x] **Component Design:** Modular components following Atomic Design.
+- [x] **State Management:** Effective use of `useState`, `useEffect`, and `Context API`.
+- [x] **Code Clarity:** Clean, documented, and maintainable code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
