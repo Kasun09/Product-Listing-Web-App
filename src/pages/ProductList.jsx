@@ -41,7 +41,6 @@ const ProductList = () => {
         setLoading(true);
         setError(null);
         try {
-            // Wait for both the API call and a minimum delay of 800ms to ensure the loader is visible and preventing flickering
             const [data] = await Promise.all([
                 fetchProducts(),
                 new Promise(resolve => setTimeout(resolve, 800))
@@ -66,12 +65,12 @@ const ProductList = () => {
     const filteredAndSortedProducts = useMemo(() => {
         let result = [...products];
 
-        // 1. Filter by Category
+        // Filter by Category
         if (selectedCategory !== 'all') {
             result = result.filter(product => product.category === selectedCategory);
         }
 
-        // 2. Filter by Search Term
+        // Filter by Search Term
         if (debouncedSearchTerm) {
             const lowerTerm = debouncedSearchTerm.toLowerCase();
             result = result.filter(product =>
@@ -79,16 +78,14 @@ const ProductList = () => {
             );
         }
 
-        // 3. Sort
+        // Sort
         if (sortOption === 'price-asc') {
             result.sort((a, b) => a.price - b.price);
         } else if (sortOption === 'price-desc') {
             result.sort((a, b) => b.price - a.price);
         }
 
-        // 4. Add Recommendation Flag
-        // We map new objects to avoid mutating original state, although strictly not necessary if just reading,
-        // but good for injecting the 'recommended' property for the UI to use.
+        // Add Recommendation Flag
         return result.map(product => ({
             ...product,
             recommended: isRecommended(product, averagePrice)
@@ -126,7 +123,7 @@ const ProductList = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="flex flex-col gap-6">
 
-                        {/* 1. Search Bar - Centered & Wide */}
+                        {/*Search Bar - Centered & Wide */}
                         <div className="w-full flex justify-center">
                             <SearchBar
                                 searchTerm={searchTerm}
@@ -136,7 +133,7 @@ const ProductList = () => {
                         </div>
 
 
-                        {/* 2. Controls Toolbar */}
+                        {/*Controls Toolbar */}
                         {/* Mobile Filter Toggle */}
                         <div className="md:hidden">
                             <button
