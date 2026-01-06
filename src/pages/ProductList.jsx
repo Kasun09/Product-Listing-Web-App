@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { PackageSearch, LayoutGrid, LayoutList } from 'lucide-react';
+import { PackageSearch, LayoutGrid, LayoutList, Filter } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { fetchProducts } from '../services/api';
 import ProductCard from '../components/ProductCard';
@@ -27,6 +27,7 @@ const ProductList = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [sortOption, setSortOption] = useState('default');
     const [viewMode, setViewMode] = useState('grid');
+    const [showFilters, setShowFilters] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
 
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
@@ -136,10 +137,21 @@ const ProductList = () => {
 
 
                         {/* 2. Controls Toolbar */}
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        {/* Mobile Filter Toggle */}
+                        <div className="md:hidden">
+                            <button
+                                onClick={() => setShowFilters(!showFilters)}
+                                className="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 py-3 rounded-xl font-medium transition-all active:scale-95"
+                            >
+                                <Filter className="w-4 h-4" />
+                                {showFilters ? 'Hide Filters' : 'Filter & Sort'}
+                            </button>
+                        </div>
+
+                        <div className={`flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-300 ease-in-out origin-top ${showFilters ? 'max-h-[500px] opacity-100 mb-4' : 'max-h-0 opacity-0 overflow-hidden md:max-h-none md:opacity-100 md:overflow-visible'}`}>
 
                             {/* Sort - Left Side */}
-                            <div className="flex-shrink-0">
+                            <div className="flex-shrink-0 pt-2 md:pt-0">
                                 <SortDropdown sortOption={sortOption} onSortChange={setSortOption} />
                             </div>
 

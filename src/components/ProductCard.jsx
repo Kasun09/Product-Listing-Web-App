@@ -61,7 +61,7 @@ const ProductCard = ({ product, isFavorite, toggleFavorite, viewMode = 'grid', o
                 </span>
 
                 <h3
-                    className={cn("font-semibold text-slate-800 dark:text-white mb-2", isList ? 'text-lg' : 'text-sm')}
+                    className={cn("font-semibold text-slate-800 dark:text-white mb-2 line-clamp-2", isList ? 'text-lg' : 'text-sm')}
                     title={product.title}
                 >
                     {product.title}
