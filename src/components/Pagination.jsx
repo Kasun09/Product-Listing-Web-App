@@ -8,9 +8,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     const renderPageNumbers = () => {
         const pages = [];
         for (let i = 1; i <= totalPages; i++) {
-            // Logic to show limited pages if too many could be added here, 
-            // but for 20 items (3 pages), rendering all is fine.
-            // Let's implement a simple version that scales okay for small numbers.
             pages.push(
                 <button
                     key={i}

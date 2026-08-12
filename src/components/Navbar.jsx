@@ -45,7 +45,7 @@ const Navbar = () => {
 
                     {/* Right Actions */}
                     <div className="flex items-center gap-4">
-                        {/* Favorites Counter (Mobile/Desktop) */}
+                        {/* Favorites Counter*/}
                         <motion.div
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}

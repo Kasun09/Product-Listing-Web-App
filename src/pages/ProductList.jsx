@@ -133,7 +133,7 @@ const ProductList = () => {
                         </div>
 
 
-                        {/*Controls Toolbar */}
+                       
                         {/* Mobile Filter Toggle */}
                         <div className="md:hidden">
                             <button

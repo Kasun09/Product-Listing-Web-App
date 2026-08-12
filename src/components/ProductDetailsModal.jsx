@@ -3,7 +3,7 @@ import { X, Star, ShoppingCart, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ProductDetailsModal = ({ product, onClose, isFavorite, toggleFavorite }) => {
-    // Prevent body scroll when modal is open
+    // Prevent body scroll when modal is open 
     useEffect(() => {
         if (product) {
             document.body.style.overflow = 'hidden';
